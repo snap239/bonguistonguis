@@ -14,244 +14,62 @@
       --surface2: #1f1f1f;
       --text: #ffffff;
       --muted: #888;
-      --border: #555;
+      --border: #333;
       --accent: #e8e0d0;
-      --green: #4ade80;
+      --spotify: #1DB954;
       --blue: #60a5fa;
     }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      font-weight: 300;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 1.5rem 4rem;
+      display: flex; flex-direction: column;
+      align-items: center; padding: 0 1.5rem 4rem;
     }
 
     header {
       width: 100%; max-width: 540px;
-      padding: 3.5rem 0 2.5rem;
-      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border);
       margin-bottom: 2rem;
-      opacity: 0; animation: fadeUp 0.6s ease forwards;
     }
-    .eyebrow {
-      font-size: 0.65rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.8rem, 8vw, 3.8rem);
-      font-weight: 700; line-height: 1;
-      letter-spacing: -0.03em;
-    }
+    .eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+    h1 { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 700; line-height: 1; }
     h1 span { color: var(--muted); }
-    .subtitle {
-      margin-top: 1rem; font-size: 0.88rem;
-      color: var(--muted); line-height: 1.6;
-    }
 
-    .cards {
-      width: 100%; max-width: 540px;
-      display: flex; flex-direction: column;
-      gap: 1px; background: var(--border);
-      border-radius: 16px; overflow: hidden;
-    }
-    .card {
-      background: var(--surface);
-      padding: 1.75rem;
-      opacity: 0; animation: fadeUp 0.6s ease forwards;
-    }
-    .card:nth-child(1) { animation-delay: 0.1s; }
-    .card:nth-child(2) { animation-delay: 0.2s; }
-    .card:nth-child(3) { animation-delay: 0.3s; }
-    .card:nth-child(4) { animation-delay: 0.4s; }
+    .cards { width: 100%; max-width: 540px; display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 16px; overflow: hidden; }
+    .card { background: var(--surface); padding: 1.75rem; }
+    .card-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; font-weight: 700; margin-bottom: 1.25rem; }
 
-    .card-label {
-      font-size: 0.7rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: #fff;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
+    /* Spotify Button */
+    .btn-spotify {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      background: var(--spotify); color: #000; text-decoration: none;
+      padding: 1rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem;
+      transition: transform 0.2s;
     }
+    .btn-spotify:active { transform: scale(0.98); }
 
-    .wifi-row {
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 1rem;
-      background: var(--surface2);
-      border-radius: 10px; padding: 1rem 1.25rem;
-      margin-bottom: 0.75rem;
+    /* Server Grid */
+    .server-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .btn-server {
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      background: var(--surface2); color: var(--text); border: 1px solid var(--border);
+      padding: 1rem; border-radius: 10px; text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      transition: border-color 0.2s;
     }
-    .wifi-key {
-      font-size: 0.65rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 0.2rem;
-    }
-    .wifi-val { font-size: 0.95rem; font-weight: 500; }
+    .btn-server:hover { border-color: var(--accent); }
 
-    /* Action buttons */
-    .wifi-actions {
-      display: flex; gap: 0.6rem;
-      flex-wrap: wrap; margin-bottom: 0.75rem;
-    }
-    .btn {
-      flex: 1; min-width: 100px;
-      border: none; border-radius: 8px;
-      padding: 0.75rem 1rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem; font-weight: 500;
-      letter-spacing: 0.02em; cursor: pointer;
-      display: flex; align-items: center;
-      justify-content: center; gap: 0.4rem;
-      transition: opacity 0.2s, transform 0.1s;
-    }
-    .btn:active { transform: scale(0.97); }
+    /* WiFi Controls */
+    .wifi-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+    .btn-action { flex: 1; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: #fff; cursor: pointer; font-size: 0.75rem; }
+    .btn-primary { background: var(--blue); color: #000; border: none; font-weight: 600; }
 
-    .btn-connect {
-      background: var(--blue); color: #0d0d0d; font-weight: 600;
-    }
-    .btn-connect:hover { opacity: 0.88; }
+    .pass-panel, .qr-panel { display: none; background: #000; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; }
+    .visible { display: block !important; }
+    .qr-box { background: #fff; padding: 10px; display: inline-block; border-radius: 4px; }
 
-    .btn-pass {
-      background: var(--surface2); color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-pass:hover { background: #262626; }
-
-    .btn-qr {
-      background: var(--surface2); color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-qr:hover { background: #262626; }
-    .btn-qr.active { border-color: var(--accent); color: var(--accent); }
-
-    /* Password reveal panel */
-    .pass-panel {
-      display: none;
-      background: var(--surface2); border-radius: 10px;
-      padding: 1rem 1.25rem; margin-bottom: 0.75rem;
-      align-items: center; justify-content: space-between; gap: 1rem;
-    }
-    .pass-panel.visible { display: flex; }
-    .pass-text {
-      font-size: 1rem; font-weight: 500;
-      letter-spacing: 0.04em; word-break: break-all;
-    }
-    .btn-copy {
-      background: var(--accent); color: #0d0d0d;
-      border: none; border-radius: 6px;
-      padding: 0.4rem 0.8rem; flex-shrink: 0;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem; font-weight: 500;
-      cursor: pointer; transition: opacity 0.2s;
-    }
-    .btn-copy:hover { opacity: 0.85; }
-    .btn-copy.copied { background: var(--green); color: #0d0d0d; }
-
-    /* QR panel */
-    .qr-panel {
-      display: none;
-      flex-direction: column; align-items: center;
-      background: var(--surface2); border-radius: 12px;
-      padding: 1.5rem; margin-bottom: 0.75rem; gap: 0.75rem;
-    }
-    .qr-panel.visible { display: flex; }
-    .qr-box {
-      background: #fff; border-radius: 8px; padding: 12px;
-    }
-    .qr-label {
-      font-size: 0.75rem; color: var(--muted); text-align: center;
-    }
-
-    .hint { font-size: 0.74rem; color: var(--muted); }
-
-    /* Lights card */
-    .lights-subtitle {
-      font-size: 0.82rem; color: #bbb;
-      line-height: 1.5; margin-bottom: 1.25rem;
-    }
-    .credentials {
-      background: var(--surface2); border-radius: 10px;
-      padding: 1rem 1.25rem; margin-bottom: 0.75rem;
-      display: flex; flex-direction: column; gap: 0.6rem;
-    }
-    .cred-row { display: flex; align-items: center; gap: 0.75rem; }
-    .cred-key {
-      font-size: 0.65rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
-      min-width: 80px; flex-shrink: 0;
-    }
-    .cred-val { font-size: 0.92rem; font-weight: 500; }
-    .btn-link {
-      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      background: var(--surface2); color: var(--text);
-      border: 1px solid var(--border); border-radius: 8px;
-      padding: 0.75rem 1rem; width: 100%;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem; font-weight: 500;
-      text-decoration: none; cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-      margin-bottom: 0.75rem;
-    }
-    .btn-link:hover { background: #262626; border-color: var(--accent); }
-
-    /* Bingo image link */
-    .bingo-link {
-      display: block; position: relative;
-      border-radius: 12px; overflow: hidden;
-      border: 1px solid var(--border);
-      text-decoration: none;
-    }
-    .bingo-img {
-      width: 100%; display: block;
-      height: 200px; object-fit: cover;
-      transition: opacity 0.25s;
-    }
-    .bingo-link:hover .bingo-img { opacity: 0.75; }
-    .bingo-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.75));
-      padding: 1.5rem 1.25rem 1rem;
-      display: flex; align-items: center; gap: 0.5rem;
-      color: #fff; font-size: 0.82rem; font-weight: 500;
-    }
-
-    /* Rules */
-    .rules { list-style: none; }
-    .rules li {
-      display: flex; gap: 1rem; align-items: flex-start;
-      padding: 0.85rem 0; border-bottom: 1px solid var(--border);
-      font-size: 0.88rem; line-height: 1.55; color: #ddd;
-      font-weight: 400;
-    }
-    .rules li:last-child { border-bottom: none; padding-bottom: 0; }
-    .rules li:first-child { padding-top: 0; }
-    .num {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.75rem; color: var(--muted);
-      min-width: 1.2rem; padding-top: 0.1rem;
-    }
-
-    footer {
-      width: 100%; max-width: 540px;
-      margin-top: 2rem; padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.7rem; color: var(--muted);
-      text-align: center; letter-spacing: 0.05em;
-      opacity: 0; animation: fadeUp 0.6s ease 0.35s forwards;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 400px) {
-      .wifi-actions { flex-direction: column; }
-      .btn { min-width: unset; }
-    }
+    footer { margin-top: 3rem; color: var(--muted); font-size: 0.7rem; }
   </style>
 </head>
 <body>
@@ -259,167 +77,58 @@
   <header>
     <p class="eyebrow">Bienvenido a</p>
     <h1>Casa<br><span>Bonguito</span></h1>
-    <p class="subtitle">Todo lo que necesitas para sentirte como en casa.</p>
   </header>
 
   <div class="cards">
-
-    <!-- WiFi -->
     <div class="card">
-      <p class="card-label">WiFi</p>
-
-      <div class="wifi-row">
-        <div>
-          <div class="wifi-key">Red</div>
-          <div class="wifi-val">Depto 1503 5GHz</div>
-        </div>
-      </div>
-
+      <p class="card-label">WiFi Casa</p>
+      <p style="font-size: 0.9rem;">Red: <strong>Depto 1503 5GHz</strong></p>
       <div class="wifi-actions">
-        <button class="btn btn-connect" onclick="connectWifi()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/>
-            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-          Conectarse al WiFi
-        </button>
-        <button class="btn btn-pass" onclick="togglePass()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          Contraseña
-        </button>
-        <button class="btn btn-qr" id="btnQr" onclick="toggleQr()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-            <rect x="3" y="14" width="7" height="7"/>
-            <path d="M14 14h3v3h-3zM17 17h3v3h-3zM14 20h3"/>
-          </svg>
-          Código QR
-        </button>
+        <button class="btn-action btn-primary" onclick="connectWifi()">Conectar</button>
+        <button class="btn-action" onclick="togglePass()">Clave</button>
+        <button class="btn-action" onclick="toggleQr()">QR</button>
       </div>
-
-      <!-- Password panel -->
-      <div class="pass-panel" id="passPanel">
-        <span class="pass-text">8koNANUwtdKccc</span>
-        <button class="btn-copy" id="btnCopy" onclick="copyPass()">Copiar</button>
+      <div id="passPanel" class="pass-panel">
+        <code style="font-size: 1.1rem; letter-spacing: 1px;">8koNANUwtdKccc</code>
       </div>
-
-      <!-- QR panel -->
-      <div class="qr-panel" id="qrPanel">
+      <div id="qrPanel" class="qr-panel">
         <div class="qr-box" id="qrBox"></div>
-        <p class="qr-label">Escanea con la cámara para conectarte</p>
       </div>
-
-      <p class="hint">El botón "Conectarse" funciona en Android · En iPhone usa el QR o la contraseña</p>
     </div>
 
-    <!-- Luces -->
     <div class="card">
-      <p class="card-label">Control de luces y enchufes</p>
-      <p class="lights-subtitle"> Para controlar las luces e interruptores inteligentes entra al link e inicia sesión con las siguientes credenciales. Debes estar conectado al WiFi de casa.</p>
-
-      <div class="credentials">
-        <div class="cred-row">
-          <span class="cred-key">Usuario</span>
-          <span class="cred-val">invitado</span>
-        </div>
-        <div class="cred-row">
-          <span class="cred-key">Contraseña</span>
-          <span class="cred-val">12345</span>
-        </div>
-      </div>
-
-      <a class="btn-link" href="http://192.168.1.170:8123" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
-        Abrir panel de control
-      </a>
-      <p class="hint">⚠️ Solo funciona conectado al WiFi del departamento</p>
-    </div>
-
-    <!-- Bingo -->
-    <div class="card">
-      <p class="card-label">Manual de usuario Bingo</p>
-
-      <a href="https://drive.google.com/file/d/1CMCAm4Cs2kr7640Wr9kLzojjBcDV6uw5/view?usp=share_link" target="_blank" class="bingo-link">
-        <img
-          src="./bingo.jpg"
-          alt="Manual de usuario Bingo"
-          class="bingo-img"
-        />
-        <div class="bingo-overlay">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-          Abrir manual
-        </div>
+      <p class="card-label">Música Colaborativa</p>
+      <a href="https://open.spotify.com/playlist/48aZco1LtD3WRF2QrRu3Qe?si=gAXrVGLIQ8uDyIYOefuajQ&pt=bb4517ccb7bf650434d2293f34d9f424&pi=I6DNgUylTtCz6" target="_blank" class="btn-spotify">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.508 17.302c-.223.367-.704.482-1.07.259-2.858-1.747-6.456-2.143-10.693-1.173-.418.096-.842-.162-.938-.58-.096-.417.162-.841.58-.937 4.637-1.06 8.604-.604 11.862 1.386.366.223.483.704.259 1.07zm1.479-3.259c-.28.455-.878.601-1.333.32-3.27-2.01-8.254-2.593-12.119-1.42-.511.156-1.047-.134-1.203-.645-.155-.51.134-1.046.645-1.202 4.413-1.339 9.898-.684 13.689 1.64.456.28.601.878.321 1.332zm.126-3.411c-3.922-2.329-10.385-2.544-14.131-1.406-.602.183-1.242-.163-1.425-.765-.182-.603.163-1.242.766-1.425 4.301-1.306 11.439-1.054 15.93 1.613.541.321.716 1.018.395 1.559-.32.542-1.018.718-1.558.397l.023-.014z"/></svg>
+        Agregar temas a Spotify
       </a>
     </div>
 
-    <!-- Notas -->
     <div class="card">
-      <p class="card-label">Reglas de la casa</p>
-      <ul class="rules">
-        <li><span class="num">01</span><span>No fumar dentro de la casa. Afuera, en el mueble metalico hay un cenicero.</span></li>
-        <li><span class="num">02</span><span>Puede decirle a Alexa que encienda o apague algunas cosas; Alexa enciende el microondas o Alexa enciende luces cocina</span></li>
-        <li><span class="num">03</span><span>Si usa la cocina por favor corte la corriente de esta desde el interruptor rojo sl lado de estw.</span></li>
-        <li><span class="num">04</span><span>Si algo falla, avísanos sin problema. ¡Para eso estamos!</span></li>
-      </ul>
+      <p class="card-label">Servidor</p>
+      <div class="server-grid">
+        <a href="https://pedir.casabonguito.com" target="_blank" class="btn-server">🎬 Series y Pelis</a>
+        <a href="https://qbit.casabonguito.com" target="_blank" class="btn-server">📥 qBit</a>
+        <a href="https://inventario.casabonguito.com" target="_blank" class="btn-server">📦 Inventario</a>
+        <a href="https://home.casabonguito.com" target="_blank" class="btn-server">⚙️ Administración</a>
+      </div>
     </div>
-
   </div>
 
-  <footer>casabonguito.com · Hecho con cariño para nuestros invitados</footer>
+  <footer>casabonguito.com</footer>
 
   <script>
     const SSID = "Depto 1503 5GHz";
     const PASS = "8koNANUwtdKccc";
-    const WPA_STRING = `WIFI:T:WPA;S:${SSID};P:${PASS};;`;
-
-    let qrGenerated = false;
-    let passVisible = false;
-    let qrVisible = false;
-
-    function connectWifi() {
-      window.location.href = `WIFI:T:WPA;S:${encodeURIComponent(SSID)};P:${encodeURIComponent(PASS)};;`;
-    }
-
-    function togglePass() {
-      passVisible = !passVisible;
-      document.getElementById('passPanel').classList.toggle('visible', passVisible);
-    }
-
+    function togglePass() { document.getElementById('passPanel').classList.toggle('visible'); }
     function toggleQr() {
-      qrVisible = !qrVisible;
-      document.getElementById('qrPanel').classList.toggle('visible', qrVisible);
-      document.getElementById('btnQr').classList.toggle('active', qrVisible);
-
-      if (qrVisible && !qrGenerated) {
-        new QRCode(document.getElementById('qrBox'), {
-          text: WPA_STRING,
-          width: 200,
-          height: 200,
-          colorDark: '#000000',
-          colorLight: '#ffffff',
-          correctLevel: QRCode.CorrectLevel.M
-        });
-        qrGenerated = true;
+      const p = document.getElementById('qrPanel');
+      p.classList.toggle('visible');
+      if (p.classList.contains('visible') && !document.getElementById('qrBox').innerHTML) {
+        new QRCode(document.getElementById('qrBox'), { text: `WIFI:T:WPA;S:${SSID};P:${PASS};;`, width: 150, height: 150 });
       }
     }
-
-    function copyPass() {
-      navigator.clipboard.writeText(PASS).then(() => {
-        const b = document.getElementById('btnCopy');
-        b.textContent = '¡Copiada!';
-        b.classList.add('copied');
-        setTimeout(() => { b.textContent = 'Copiar'; b.classList.remove('copied'); }, 2000);
-      });
-    }
+    function connectWifi() { window.location.href = `WIFI:T:WPA;S:${SSID};P:${PASS};;`; }
   </script>
-
 </body>
 </html>
