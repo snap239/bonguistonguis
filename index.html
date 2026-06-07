@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Casa Bonguito</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -13,7 +13,7 @@
       --surface: #171717;
       --surface2: #1f1f1f;
       --text: #ffffff;
-      --muted: #888;
+      --muted: #b3b3b3; 
       --border: #555;
       --accent: #e8e0d0;
       --green: #4ade80;
@@ -23,7 +23,8 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      font-weight: 300;
+      font-weight: 400; 
+      font-size: 1.2rem; /* Fuente base global más grande (antes 1.05rem) */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -39,19 +40,19 @@
       opacity: 0; animation: fadeUp 0.6s ease forwards;
     }
     .eyebrow {
-      font-size: 0.65rem; letter-spacing: 0.2em;
+      font-size: 0.85rem; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--muted);
       margin-bottom: 0.75rem;
     }
     h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(2.8rem, 8vw, 3.8rem);
+      font-size: clamp(3.2rem, 10vw, 4.2rem); /* Título un poco más imponente */
       font-weight: 700; line-height: 1;
       letter-spacing: -0.03em;
     }
     h1 span { color: var(--muted); }
     .subtitle {
-      margin-top: 1rem; font-size: 0.88rem;
+      margin-top: 1rem; font-size: 1.1rem;
       color: var(--muted); line-height: 1.6;
     }
 
@@ -63,7 +64,7 @@
     }
     .card {
       background: var(--surface);
-      padding: 1.75rem;
+      padding: 2rem 1.75rem; /* Más aire interno para acompañar la letra grande */
       opacity: 0; animation: fadeUp 0.6s ease forwards;
     }
     .card:nth-child(1) { animation-delay: 0.1s; }
@@ -74,9 +75,16 @@
     .card:nth-child(6) { animation-delay: 0.6s; }
 
     .card-label {
-      font-size: 0.7rem; letter-spacing: 0.2em;
+      font-size: 0.95rem; letter-spacing: 0.2em;
       text-transform: uppercase; color: #fff;
       font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    
+    .card-sublabel {
+      font-size: 1rem; /* El "(Pulse la imagen)" ahora destaca más */
+      color: var(--blue); /* Un toque azul suave para que invite a hacer clic */
+      margin-top: -1rem;
       margin-bottom: 1.25rem;
     }
 
@@ -84,33 +92,33 @@
       display: flex; align-items: center;
       justify-content: space-between; gap: 1rem;
       background: var(--surface2);
-      border-radius: 10px; padding: 1rem 1.25rem;
-      margin-bottom: 0.75rem;
+      border-radius: 10px; padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
     }
     .wifi-key {
-      font-size: 0.65rem; letter-spacing: 0.1em;
+      font-size: 0.85rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.4rem;
     }
-    .wifi-val { font-size: 0.95rem; font-weight: 500; }
+    .wifi-val { font-size: 1.25rem; font-weight: 600; } /* Nombre de red más visible */
 
     .wifi-actions {
       display: flex; gap: 0.6rem;
       flex-wrap: wrap; margin-bottom: 0.75rem;
     }
     .btn {
-      flex: 1; min-width: 100px;
+      flex: 1; min-width: 120px;
       border: none; border-radius: 8px;
-      padding: 0.75rem 1rem;
+      padding: 1rem 1.2rem; /* Botones más grandes y fáciles de presionar */
       font-family: 'Inter', sans-serif;
-      font-size: 0.78rem; font-weight: 500;
+      font-size: 0.95rem; font-weight: 600;
       letter-spacing: 0.02em; cursor: pointer;
       display: flex; align-items: center;
-      justify-content: center; gap: 0.4rem;
+      justify-content: center; gap: 0.5rem;
       transition: opacity 0.2s, transform 0.1s;
     }
     .btn:active { transform: scale(0.97); }
-    .btn-connect { background: var(--blue); color: #0d0d0d; font-weight: 600; }
+    .btn-connect { background: var(--blue); color: #0d0d0d; }
     .btn-connect:hover { opacity: 0.88; }
     .btn-pass { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
     .btn-pass:hover { background: #262626; }
@@ -121,17 +129,17 @@
     .pass-panel {
       display: none;
       background: var(--surface2); border-radius: 10px;
-      padding: 1rem 1.25rem; margin-bottom: 0.75rem;
+      padding: 1.2rem 1.4rem; margin-bottom: 0.75rem;
       align-items: center; justify-content: space-between; gap: 1rem;
     }
     .pass-panel.visible { display: flex; }
-    .pass-text { font-size: 1rem; font-weight: 500; letter-spacing: 0.04em; word-break: break-all; }
+    .pass-text { font-size: 1.25rem; font-weight: 600; letter-spacing: 0.04em; word-break: break-all; }
     .btn-copy {
       background: var(--accent); color: #0d0d0d;
       border: none; border-radius: 6px;
-      padding: 0.4rem 0.8rem; flex-shrink: 0;
+      padding: 0.6rem 1.2rem; flex-shrink: 0;
       font-family: 'Inter', sans-serif;
-      font-size: 0.72rem; font-weight: 500;
+      font-size: 0.9rem; font-weight: 600;
       cursor: pointer; transition: opacity 0.2s;
     }
     .btn-copy:hover { opacity: 0.85; }
@@ -141,38 +149,38 @@
       display: none;
       flex-direction: column; align-items: center;
       background: var(--surface2); border-radius: 12px;
-      padding: 1.5rem; margin-bottom: 0.75rem; gap: 0.75rem;
+      padding: 1.75rem; margin-bottom: 0.75rem; gap: 0.75rem;
     }
     .qr-panel.visible { display: flex; }
     .qr-box { background: #fff; border-radius: 8px; padding: 12px; }
-    .qr-label { font-size: 0.75rem; color: var(--muted); text-align: center; }
+    .qr-label { font-size: 0.95rem; color: var(--muted); text-align: center; }
 
-    .hint { font-size: 0.74rem; color: var(--muted); }
+    .hint { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
 
     .lights-subtitle {
-      font-size: 0.82rem; color: #bbb;
-      line-height: 1.5; margin-bottom: 1.25rem;
+      font-size: 1.05rem; color: #bbb;
+      line-height: 1.6; margin-bottom: 1.5rem;
     }
     .credentials {
       background: var(--surface2); border-radius: 10px;
-      padding: 1rem 1.25rem; margin-bottom: 0.75rem;
-      display: flex; flex-direction: column; gap: 0.6rem;
+      padding: 1.2rem 1.4rem; margin-bottom: 1rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
     }
     .cred-row { display: flex; align-items: center; gap: 0.75rem; }
     .cred-key {
-      font-size: 0.65rem; letter-spacing: 0.1em;
+      font-size: 0.85rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted);
-      min-width: 80px; flex-shrink: 0;
+      min-width: 110px; flex-shrink: 0;
     }
-    .cred-val { font-size: 0.92rem; font-weight: 500; }
+    .cred-val { font-size: 1.15rem; font-weight: 600; }
 
     .btn-link {
       display: flex; align-items: center; justify-content: center; gap: 0.5rem;
       background: var(--surface2); color: var(--text);
       border: 1px solid var(--border); border-radius: 8px;
-      padding: 0.75rem 1rem; width: 100%;
+      padding: 1rem 1.2rem; width: 100%;
       font-family: 'Inter', sans-serif;
-      font-size: 0.82rem; font-weight: 500;
+      font-size: 1.05rem; font-weight: 600;
       text-decoration: none; cursor: pointer;
       transition: background 0.2s, border-color 0.2s;
       margin-bottom: 0.75rem;
@@ -187,49 +195,36 @@
     }
     .bingo-img {
       width: 100%; display: block;
-      height: 200px; object-fit: cover; transition: opacity 0.25s;
+      height: 240px; object-fit: cover; transition: opacity 0.25s;
     }
     .bingo-link:hover .bingo-img { opacity: 0.75; }
     .bingo-overlay {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.75));
-      padding: 1.5rem 1.25rem 1rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      padding: 2.5rem 1.25rem 1.25rem;
       display: flex; align-items: center; gap: 0.5rem;
-      color: #fff; font-size: 0.82rem; font-weight: 500;
+      color: #fff; font-size: 1.05rem; font-weight: 600;
     }
-
-    /* Spotify */
-    .btn-spotify {
-      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      background: #1DB954; color: #000;
-      border: none; border-radius: 8px;
-      padding: 0.85rem 1rem; width: 100%;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem; font-weight: 600;
-      text-decoration: none; cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .btn-spotify:hover { opacity: 0.88; }
 
     .rules { list-style: none; }
     .rules li {
-      display: flex; gap: 1rem; align-items: flex-start;
-      padding: 0.85rem 0; border-bottom: 1px solid var(--border);
-      font-size: 0.88rem; line-height: 1.55; color: #ddd; font-weight: 400;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.2rem 0; border-bottom: 1px solid var(--border);
+      font-size: 1.1rem; line-height: 1.6; color: #eee; font-weight: 400;
     }
     .rules li:last-child { border-bottom: none; padding-bottom: 0; }
     .rules li:first-child { padding-top: 0; }
     .num {
       font-family: 'Syne', sans-serif;
-      font-size: 0.75rem; color: var(--muted);
-      min-width: 1.2rem; padding-top: 0.1rem;
+      font-size: 0.95rem; color: var(--muted);
+      min-width: 1.6rem; padding-top: 0.15rem;
     }
 
     footer {
       width: 100%; max-width: 540px;
       margin-top: 2rem; padding-top: 1.5rem;
       border-top: 1px solid var(--border);
-      font-size: 0.7rem; color: var(--muted);
+      font-size: 0.85rem; color: var(--muted);
       text-align: center; letter-spacing: 0.05em;
       opacity: 0; animation: fadeUp 0.6s ease 0.35s forwards;
     }
@@ -254,7 +249,6 @@
 
   <div class="cards">
 
-    <!-- WiFi -->
     <div class="card">
       <p class="card-label">WiFi</p>
       <div class="wifi-row">
@@ -265,20 +259,20 @@
       </div>
       <div class="wifi-actions">
         <button class="btn btn-connect" onclick="connectWifi()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/>
             <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/>
           </svg>
           Conectarse al WiFi
         </button>
         <button class="btn btn-pass" onclick="togglePass()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
           Contraseña
         </button>
         <button class="btn btn-qr" id="btnQr" onclick="toggleQr()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
             <rect x="3" y="14" width="7" height="7"/>
             <path d="M14 14h3v3h-3zM17 17h3v3h-3zM14 20h3"/>
@@ -297,7 +291,6 @@
       <p class="hint">El botón "Conectarse" funciona en Android · En iPhone usa el QR o la contraseña</p>
     </div>
 
-    <!-- Luces -->
     <div class="card">
       <p class="card-label">Control de luces y enchufes</p>
       <p class="lights-subtitle">Para controlar las luces e interruptores inteligentes entra al link e inicia sesión con las siguientes credenciales. <b>Debes estar conectado al WiFi de casa.</b> También puede usar el teléfono sobre el rack del living </p>
@@ -312,7 +305,7 @@
         </div>
       </div>
       <a class="btn-link" href="http://192.168.1.170:8123" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
           <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
         </svg>
@@ -321,13 +314,13 @@
       <p class="hint">⚠️ Solo funciona conectado al WiFi del departamento</p>
     </div>
 
-    <!-- Bingo -->
     <div class="card">
       <p class="card-label">Manual de usuario Bingo</p>
+      <p class="card-sublabel"><strong>(Pulse la imagen)</strong></p>
       <a href="https://bit.ly/4fqGXfJ" target="_blank" class="bingo-link">
         <img src="./bingo.jpg" alt="Manual de usuario Bingo" class="bingo-img" />
         <div class="bingo-overlay">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
             <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
           </svg>
@@ -336,7 +329,6 @@
       </a>
     </div>
 
-    <!-- Reglas -->
     <div class="card">
       <p class="card-label">Reglas de la casa</p>
       <ul class="rules">
