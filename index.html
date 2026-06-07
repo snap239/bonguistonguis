@@ -194,8 +194,10 @@
       border: 1px solid var(--border); text-decoration: none;
     }
     .bingo-img {
-      width: 100%; display: block;
-      height: 240px; object-fit: cover; transition: opacity 0.25s;
+      width: 100%;
+      height: 180px; /* <--- Altura más baja para acercarse al cuadrado */
+      object-fit: cover;
+      transition: opacity 0.25s;
     }
     .bingo-link:hover .bingo-img { opacity: 0.75; }
     .bingo-overlay {
